@@ -1,7 +1,7 @@
 import React from 'react';
 import TodoCard from './TodoCard';
 
-function TodoList({ todos, onToggle, onEdit, onDelete, isLoading }) {
+function TodoList({ todos, today, onToggle, onEdit, onDelete, isLoading }) {
   if (todos.length === 0) {
     return (
       <div className="todo-list empty-state">
@@ -18,6 +18,7 @@ function TodoList({ todos, onToggle, onEdit, onDelete, isLoading }) {
         <TodoCard
           key={todo.id}
           todo={todo}
+          today={today}
           onToggle={onToggle}
           onEdit={onEdit}
           onDelete={onDelete}

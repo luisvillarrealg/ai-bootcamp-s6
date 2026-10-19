@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { getDaysOverdue, formatOverdueLabel, getLocalDateString } from '../utils/overdue';
 
-function TodoCard({ todo, onToggle, onEdit, onDelete, isLoading }) {
+function TodoCard({ todo, today = getLocalDateString(), onToggle, onEdit, onDelete, isLoading }) {
+  const daysOverdue = getDaysOverdue(todo, today);
+  const overdue = daysOverdue > 0;
   const [isEditing, setIsEditing] = useState(false);
   const [editTitle, setEditTitle] = useState(todo.title);
   const [editDueDate, setEditDueDate] = useState(todo.dueDate || '');
@@ -107,7 +110,7 @@ function TodoCard({ todo, onToggle, onEdit, onDelete, isLoading }) {
   }
 
   return (
-    <div className={`todo-card ${todo.completed ? 'completed' : ''}`}>
+    <div className={`todo-card ${todo.completed ? 'completed' : ''} ${overdue ? 'overdue' : ''}`.trim()}>
       <input
         type="checkbox"
         checked={todo.completed === 1}
@@ -120,8 +123,13 @@ function TodoCard({ todo, onToggle, onEdit, onDelete, isLoading }) {
       <div className="todo-content">
         <h3 className="todo-title">{todo.title}</h3>
         {todo.dueDate && (
-          <p className="todo-due-date">
+          <p className={`todo-due-date${overdue ? ' overdue' : ''}`}>
             Due: {formatDate(todo.dueDate)}
+          </p>
+        )}
+        {overdue && (
+          <p className="todo-overdue-label">
+            <span aria-hidden="true">⚠️</span> {formatOverdueLabel(daysOverdue)}
           </p>
         )}
       </div>

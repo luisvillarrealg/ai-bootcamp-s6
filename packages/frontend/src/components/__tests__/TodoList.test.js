@@ -59,4 +59,18 @@ describe('TodoList Component', () => {
     expect(screen.getAllByLabelText(/Edit/)).toHaveLength(2);
     expect(screen.getAllByLabelText(/Delete/)).toHaveLength(2);
   });
+
+  it('should forward today so only overdue todos show the indicator', () => {
+    const todos = [
+      { ...mockTodos[0], dueDate: '2026-10-10' },
+      { ...mockTodos[1], completed: 0, dueDate: '2026-10-25' }
+    ];
+    const { container } = render(
+      <TodoList todos={todos} today="2026-10-19" {...mockHandlers} isLoading={false} />
+    );
+
+    expect(screen.getAllByText(/^Overdue by/)).toHaveLength(1);
+    expect(screen.getByText('Overdue by 9 days')).toBeInTheDocument();
+    expect(container.querySelectorAll('.todo-card.overdue')).toHaveLength(1);
+  });
 });

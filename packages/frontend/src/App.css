@@ -91,6 +91,23 @@ p {
   font-weight: 700;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* Dark scrim keeps white text readable on the gradient header */
+.overdue-summary {
+  padding: 4px 12px;
+  border-radius: 16px;
+  background-color: rgba(0, 0, 0, 0.35);
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .app-icon {
   font-size: 32px;
   animation: float 3s ease-in-out infinite;
@@ -364,6 +381,28 @@ p {
   margin: 4px 0 0 0;
   font-size: 12px;
   color: var(--text-secondary);
+}
+
+.todo-card.overdue {
+  border-left: 4px solid var(--danger-color);
+}
+
+.todo-due-date.overdue {
+  color: var(--danger-color);
+  font-weight: 600;
+}
+
+.todo-overdue-label {
+  margin: 4px 0 0 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--danger-color);
+}
+
+/* Lighter red keeps 12px overdue text above 4.5:1 on the dark card surface */
+[data-theme="dark"] .todo-due-date.overdue,
+[data-theme="dark"] .todo-overdue-label {
+  color: #ff8a80;
 }
 
 .todo-actions {

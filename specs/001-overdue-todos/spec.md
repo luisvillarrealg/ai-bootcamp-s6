@@ -91,7 +91,7 @@ As a user, when I edit a todo's due date, its overdue indication updates immedia
 - **FR-001**: The system MUST treat a todo as overdue when it is incomplete, has a due date, and that due date is earlier than the current calendar date.
 - **FR-002**: The system MUST NOT treat a todo as overdue when it is completed, has no due date, or has a due date of today or later.
 - **FR-003**: Users MUST be able to visually distinguish overdue todos from non-overdue todos in the todo list at a glance.
-- **FR-004**: The overdue indication MUST NOT rely on color alone. Each overdue todo MUST display an icon and a text label stating how many whole calendar days it is overdue (e.g., "Overdue by 3 days"; "Overdue by 1 day" for a single day), and its due date MUST be shown in the danger color; the label and icon MUST also be available to assistive technologies.
+- **FR-004**: The overdue indication MUST NOT rely on color alone. Each overdue todo MUST display an icon and a text label stating how many whole calendar days it is overdue (e.g., "Overdue by 3 days"; "Overdue by 1 day" for a single day), and its due date MUST be shown in the danger color; the visible label text MUST be available to assistive technologies, and the icon is decorative and hidden from them.
 - **FR-005**: The overdue indication MUST remain clearly visible in both light and dark modes and consistent with the existing application look and feel.
 - **FR-006**: The system MUST update a todo's overdue indication immediately when the user marks it complete or incomplete.
 - **FR-007**: The system MUST update a todo's overdue indication immediately when the user edits or clears its due date.

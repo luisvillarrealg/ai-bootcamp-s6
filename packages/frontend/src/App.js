@@ -3,6 +3,9 @@ import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import ThemeToggle from './components/ThemeToggle';
 import ConfirmDialog from './components/ConfirmDialog';
+import OverdueSummary from './components/OverdueSummary';
+import useCurrentDate from './hooks/useCurrentDate';
+import { countOverdue } from './utils/overdue';
 import TodoService from './services/todoService';
 import './App.css';
 
@@ -21,6 +24,8 @@ function App() {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [deletingTodoId, setDeletingTodoId] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const today = useCurrentDate();
+  const overdueCount = countOverdue(todos, today);
 
   // Initialize theme on mount
   useEffect(() => {
@@ -120,7 +125,10 @@ function App() {
             <span className="app-icon">🎃</span>
             My Todos
           </h1>
-          <ThemeToggle theme={theme} onToggle={handleToggleTheme} />
+          <div className="header-actions">
+            <OverdueSummary count={overdueCount} />
+            <ThemeToggle theme={theme} onToggle={handleToggleTheme} />
+          </div>
         </div>
       </header>
 
@@ -147,6 +155,7 @@ function App() {
           {!loading && (
             <TodoList
               todos={todos}
+              today={today}
               onToggle={handleToggleTodo}
               onEdit={handleEditTodo}
               onDelete={handleDeleteTodo}
